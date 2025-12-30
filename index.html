@@ -237,16 +237,16 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyGxvhgeV4a9bdAIs-B_YrNETz-KUkevZsumxMXeBCDP6ZuKg89Z1XBn6XpkLOFy1YBkw/exec";
+"https://script.google.com/macros/s/AKfycbxlbwr1JXGvCaRSzbFBQORbb3nL8ZDBKiKjImPZXUN067ZEYYQw-J6qI6EYOhWiTHBDOw/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
 const contadorDiv = document.getElementById('contador');
 const form = document.getElementById('ficha');
 const aceite = document.getElementById('aceite');
-
 const msgSuccess = document.getElementById('msgSuccess');
 const msgWarn = document.getElementById('msgWarn');
+const btnSubmit = form.querySelector('button[type="submit"]');
 
 // ⏳ CONTADOR
 function atualizarContador() {
@@ -284,6 +284,9 @@ form.addEventListener('submit', async e => {
     return;
   }
 
+  btnSubmit.disabled = true;
+  btnSubmit.innerText = 'Enviando...';
+
   const payload = {
     nome: nome.value,
     modalidade: modalidade.value,
@@ -294,7 +297,7 @@ form.addEventListener('submit', async e => {
     telefone: telefone.value,
     email: email.value,
     cartao: cartao.value,
-    aceite: aceite.checked
+    aceite: true
   };
 
   try {
@@ -307,7 +310,11 @@ form.addEventListener('submit', async e => {
     const json = await r.json();
 
     if (json.success) {
-      msgSuccess.innerText = `✅ Inscrição enviada com sucesso!\nNº ${json.code}`;
+      msgSuccess.innerText =
+        json.espera
+        ? `⏳ Inscrição realizada em LISTA DE ESPERA.\nNúmero: ${json.code}`
+        : `✅ Inscrição confirmada!\nNúmero: ${json.code}`;
+
       msgSuccess.style.display = 'block';
       form.reset();
       aceite.disabled = true;
@@ -319,12 +326,14 @@ form.addEventListener('submit', async e => {
   } catch (err) {
     msgWarn.innerText = '❌ Erro de conexão. Tente novamente.';
     msgWarn.style.display = 'block';
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.innerText = 'Enviar inscrição';
   }
 });
 </script>
 
 
+
 </body>
 </html>
-
-
