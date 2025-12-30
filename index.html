@@ -4,94 +4,112 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Inscrição — 2º Chama's da Poesia</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
-      font-family: "Inter", Arial, sans-serif;
+      font-family: Arial, sans-serif;
       background: #FFDEAD;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
     }
+
     .container {
       max-width: 880px;
       width: 100%;
       margin: 0 auto 40px;
       background: #fff;
       border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
       overflow: hidden;
     }
-    header img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+
+    header img { width: 100%; display: block; }
+
     header h1 {
       text-align: center;
-      font-size: 24px;
       margin: 20px 10px 5px;
-      color: #0f172a;
     }
+
     header p {
       text-align: center;
-      font-size: 15px;
-      margin-bottom: 25px;
-      color: #475569;
+      margin-bottom: 15px;
+      color: #555;
     }
+
+    /* CONTADOR */
+    #contador {
+      background: #ff0000;
+      color: #070000;
+      text-align: center;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    #contador.encerrado {
+      background: #7f1d1d;
+    }
+
     main { padding: 24px; }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    input, select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 14px;
-    }
+
     .full { grid-column: 1 / -1; }
 
-    /* === Checkbox alinhado === */
+    label {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
     .checkbox-row {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      margin-top: 14px;
-    }
-    .checkbox-label {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      color: #0f172a;
-    }
-    .checkbox-label input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #0f172a;
+      margin-top: 14px;
     }
 
     .download-link {
-      text-decoration: none;
       display: inline-block;
       margin-top: 10px;
       padding: 10px 14px;
       border-radius: 10px;
-      border: 1px dashed #cbd5e1;
-      color: #0f172a;
-      background: #fff;
-      font-weight: 600;
+      border: 1px dashed #ccc;
+      font-weight: bold;
+      text-decoration: none;
+      color: #000;
     }
+
+    button {
+      background: #0f172a;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #eee;
+      color: #000;
+    }
+
     .controls {
       display: flex;
       justify-content: center;
@@ -99,183 +117,223 @@
       margin-top: 20px;
       flex-wrap: wrap;
     }
-    button {
-      border: none;
-      background: #0f172a;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 15px;
-      transition: 0.2s;
-    }
-    button:hover { background: #1e293b; }
-    button.secondary {
-      background: #f3f4f6;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-    }
+
     .msg {
       display: none;
       margin-top: 16px;
       padding: 12px;
       border-radius: 8px;
       text-align: center;
-      font-weight: 500;
+      font-weight: bold;
     }
-    .msg.success { background: #ecfdf5; color: #065f46; display: block; }
-    .msg.warn { background: #fff7ed; color: #7c2d12; display: block; }
+
+    .success { background: #e6fffa; color: #065f46; }
+    .warn { background: #fff4e5; color: #92400e; }
+
     footer {
-      border-top: 1px solid #e5e7eb;
-      padding: 14px;
       text-align: center;
       font-size: 13px;
-      color: #475569;
+      padding: 14px;
+      border-top: 1px solid #ddd;
     }
-    @media(max-width:700px){ .grid{grid-template-columns:1fr;} }
+
+    @media(max-width:700px) {
+      .grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png" alt="CTG Chama Nativa">
-      <h1>Inscrição — 2º Chama's da Poesia</h1>
-      <p>Preencha todos os campos abaixo para confirmar sua inscrição, e aceite o regulamento.</p>
-    </header>
+<div class="container">
 
-    <main>
-      <form id="ficha">
-        <div class="grid">
-          <div class="full">
-            <label for="nome">Nome do concorrente</label>
-            <input type="text" id="nome" name="nome" required>
-          </div>
+  <header>
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
+    <h1>Inscrição — 2º Chama's da Poesia</h1>
+    <p>Preencha todos os campos e aceite o regulamento. (inscrições até 10/02/2026)</p>
+  </header>
 
-          <div class="full">
-            <label for="modalidade">Modalidade</label>
-            <select id="modalidade" name="modalidade" required>
-              <option value="">— selecione —</option>
-              <option>Prenda Pré-Mirim</option>
-              <option>Peão Pré-Mirim</option>
-              <option>Prenda Mirim</option>
-              <option>Peão Mirim</option>
-              <option>Prenda Juvenil</option>
-              <option>Peão Juvenil</option>
-              <option>Prenda Adulta</option>
-              <option>Peão Adulto</option>
-              <option>Prenda Veterana</option>
-              <option>Peão Veterano</option>
-              <option>Prenda Xirú</option>
-              <option>Peão Xirú</option>
-            </select>
-          </div>
-
-          <div class="full">
-            <label for="entidade">Entidade Tradicionalista</label>
-            <input type="text" id="entidade" name="entidade" required>
-          </div>
-
-          <div>
-            <label for="nascimento">Data de nascimento</label>
-            <input type="date" id="nascimento" name="nascimento" required>
-          </div>
-
-          <div>
-            <label for="cartao">Número do Cartão Tradicionalista</label>
-            <input type="text" id="cartao" name="cartao" required>
-          </div>
-
-          <div>
-            <label for="amadrinhador">Amadrinhador</label>
-            <input type="text" id="amadrinhador" name="amadrinhador">
-          </div>
-
-          <div>
-            <label for="telefone">Telefone (WhatsApp)</label>
-            <input type="text" id="telefone" name="telefone" required>
-          </div>
-
-          <div class="full">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-
-          <div class="full checkbox-row">
-            <label class="checkbox-label">
-              <input id="aceito" type="checkbox" required>
-              <span>Li e aceito o regulamento do <strong>2º Chama's da Poesia</strong></span>
-            </label>
-          </div>
-
-          <div class="full" style="text-align:center;">
-            <a class="download-link" href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download" target="_blank">📄 Baixar regulamento</a>
-          </div>
-        </div>
-
-        <div class="controls">
-          <button type="submit" id="enviar">Enviar inscrição</button>
-          <button type="button" class="secondary" id="voltar">Voltar ao site</button>
-        </div>
-
-        <div id="msgSuccess" class="msg success"></div>
-        <div id="msgWarn" class="msg warn"></div>
-      </form>
-    </main>
-
-    <footer>
-      CTG Chama Nativa — Sistema de Inscrições • Versão 2.0
-    </footer>
+  <!-- CONTADOR -->
+  <div id="contador">
+    ⏳ Inscrições encerram em <span id="tempoRestante"></span>
   </div>
 
-  <script>
-    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/SEU_WEB_APP_ID/exec";
+  <main>
+    <form id="ficha">
+      <div class="grid">
 
-    document.getElementById('voltar').onclick = () => window.location.href = "https://www.ctgchamanativa.com.br";
+        <div class="full">
+          <label>Nome do concorrente</label>
+          <input id="nome" required>
+        </div>
 
-    const form = document.getElementById('ficha');
-    const msgSuccess = document.getElementById('msgSuccess');
-    const msgWarn = document.getElementById('msgWarn');
+        <div class="full">
+          <label>Modalidade</label>
+          <select id="modalidade" required>
+            <option value="">— selecione —</option>
+            <option>Prenda Mirim</option>
+            <option>Peão Mirim</option>
+            <option>Prenda Juvenil</option>
+            <option>Peão Juvenil</option>
+            <option>Prenda Adulta</option>
+            <option>Peão Adulto</option>
+            <option>Prenda Veterana</option>
+            <option>Peão Veterano</option>
+            <option>Prenda Xirua</option>
+            <option>Peão Xirú</option>
+          </select>
+        </div>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      msgSuccess.style.display = 'none';
-      msgWarn.style.display = 'none';
+        <div class="full">
+          <label>Entidade Tradicionalista</label>
+          <input id="entidade" required>
+        </div>
 
-      const data = {
-        nome: nome.value,
-        modalidade: modalidade.value,
-        entidade: entidade.value,
-        nascimento: nascimento.value,
-        cartao: cartao.value,
-        amadrinhador: amadrinhador.value || '',
-        telefone: telefone.value,
-        email: email.value,
-      };
+        <div>
+          <label>Cidade</label>
+          <input id="cidade" required>
+        </div>
 
-      try {
-        const res = await fetch(GAS_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        const json = await res.json();
+        <div>
+          <label>Região Tradicionalista</label>
+          <input id="regiao" required>
+        </div>
 
-        if (json.success) {
-          if (json.status === 'confirmed') {
-            msgSuccess.innerText = `✅ Inscrição realizada com sucesso! Código: ${json.code}`;
-            msgSuccess.style.display = 'block';
-          } else {
-            msgWarn.innerText = `⚠️ Inscrição recebida — LISTA DE ESPERA (Código: ${json.code})`;
-            msgWarn.style.display = 'block';
-          }
-          form.reset();
-        } else throw new Error();
-      } catch {
-        msgWarn.innerText = '❌ Erro ao enviar. Verifique sua conexão.';
-        msgWarn.style.display = 'block';
-      }
+        <div>
+          <label>Data de nascimento</label>
+          <input type="date" id="nascimento" required>
+        </div>
+
+        <div>
+          <label>Cartão Tradicionalista</label>
+          <input id="cartao" required>
+        </div>
+
+        <div>
+          <label>Telefone (WhatsApp)</label>
+          <input id="telefone" required>
+        </div>
+
+        <div class="full">
+          <label>E-mail</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <!-- REGULAMENTO -->
+        <div class="full" style="text-align:center;">
+          <a
+            href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download"
+            target="_blank"
+            class="download-link"
+            id="btnRegulamento">
+            📄 Baixar regulamento
+          </a>
+        </div>
+
+        <small class="full" style="text-align:center;color:#666;">
+          Para aceitar, é obrigatório baixar o regulamento.
+        </small>
+
+        <div class="full checkbox-row">
+          <input type="checkbox" id="aceite" disabled required>
+          <label for="aceite">Li e aceito o regulamento</label>
+        </div>
+
+      </div>
+
+      <div class="controls">
+        <button type="submit">Enviar inscrição</button>
+        <button type="button" class="secondary"
+          onclick="window.location.href='https://www.ctgchamanativa.com.br'">
+          Voltar ao site
+        </button>
+      </div>
+
+      <div id="msgSuccess" class="msg success"></div>
+      <div id="msgWarn" class="msg warn"></div>
+
+    </form>
+  </main>
+
+  <footer>
+    CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação V.001
+  </footer>
+
+</div>
+
+<script>
+  const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx_HS8RgORMQnIixJVcm2EOHG3uwLZTYG4T4v6eZTK4BLXRY5Em_orlT7NDuAoBDxXzHA/exec";
+
+  const encerramento = new Date('2026-02-10T23:59:59-03:00');
+  const tempoSpan = document.getElementById('tempoRestante');
+  const contadorDiv = document.getElementById('contador');
+  const form = document.getElementById('ficha');
+  const checkboxAceite = document.getElementById('aceite');
+
+  // CONTADOR
+  function atualizarContador() {
+    const agora = new Date();
+    const diff = encerramento - agora;
+
+    if (diff <= 0) {
+      contadorDiv.classList.add('encerrado');
+      tempoSpan.innerText = 'INSCRIÇÕES ENCERRADAS';
+      form.style.display = 'none';
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    tempoSpan.innerText = `${d}d ${h}h ${m}m ${s}s`;
+  }
+
+  atualizarContador();
+  setInterval(atualizarContador, 1000);
+
+  // LIBERAR ACEITE
+  document.getElementById('btnRegulamento').onclick = () => {
+    checkboxAceite.disabled = false;
+  };
+
+  // SUBMIT
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = {
+      nome: nome.value,
+      modalidade: modalidade.value,
+      entidade: entidade.value,
+      cidade: cidade.value,
+      regiao: regiao.value,
+      nascimento: nascimento.value,
+      cartao: cartao.value,
+      telefone: telefone.value,
+      email: email.value,
+      aceite: checkboxAceite.checked
+    };
+
+    const res = await fetch(GAS_WEB_APP_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
     });
-  </script>
+
+    const json = await res.json();
+
+    if (json.success) {
+      document.getElementById('msgSuccess').innerText =
+        '✅ Inscrição realizada com sucesso!';
+      document.getElementById('msgSuccess').style.display = 'block';
+      form.reset();
+      checkboxAceite.disabled = true;
+    } else {
+      document.getElementById('msgWarn').innerText = json.message;
+      document.getElementById('msgWarn').style.display = 'block';
+    }
+  });
+</script>
+
 </body>
 </html>
