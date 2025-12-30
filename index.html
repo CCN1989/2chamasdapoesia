@@ -177,13 +177,14 @@ footer {
 </div>
 
 <div class="full">
-<label>Amadrinhador</label>
-<select id="amadrinhador" required>
-<option value="">— selecione —</option>
-<option value="true">SIM</option>
-<option value="false">NÃO</option>
-</select>
+  <label>Amadrinhador</label>
+  <select id="amadrinhador" required>
+    <option value="">— selecione —</option>
+    <option value="true">Sim</option>
+    <option value="false">Não</option>
+  </select>
 </div>
+
 
 <div>
 <label>Telefone (WhatsApp)</label>
@@ -236,7 +237,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbxN1E8o_e1Y29PFaZYKt-eZVEuyglntLggkpiAL7pZfIUp8gPCs_npjXOk7P0obe_1wdA/exec";
+"https://script.google.com/macros/s/AKfycbxTBhV5sLOwC2ET6VUZ9kUmjyibYJQ7Ydt6tZEcU7SkriuVKkzEjaIbth1p7DcOoPDbMg/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -244,29 +245,44 @@ const contadorDiv = document.getElementById('contador');
 const form = document.getElementById('ficha');
 const aceite = document.getElementById('aceite');
 
-function atualizarContador(){
+const msgSuccess = document.getElementById('msgSuccess');
+const msgWarn = document.getElementById('msgWarn');
+
+// ⏳ CONTADOR
+function atualizarContador() {
   const diff = encerramento - new Date();
-  if(diff <= 0){
+  if (diff <= 0) {
     contadorDiv.classList.add('encerrado');
     tempoSpan.innerText = 'INSCRIÇÕES ENCERRADAS';
     form.style.display = 'none';
     return;
   }
-  const d=Math.floor(diff/86400000),
-        h=Math.floor(diff/3600000)%24,
-        m=Math.floor(diff/60000)%60,
-        s=Math.floor(diff/1000)%60;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff / 3600000) % 24;
+  const m = Math.floor(diff / 60000) % 60;
+  const s = Math.floor(diff / 1000) % 60;
   tempoSpan.innerText = `${d}d ${h}h ${m}m ${s}s`;
 }
-setInterval(atualizarContador,1000);
+setInterval(atualizarContador, 1000);
 atualizarContador();
 
+// 📄 LIBERA ACEITE APÓS DOWNLOAD
 document.getElementById('btnRegulamento').onclick = () => {
   aceite.disabled = false;
 };
 
+// 📤 SUBMIT
 form.addEventListener('submit', async e => {
   e.preventDefault();
+
+  msgSuccess.style.display = 'none';
+  msgWarn.style.display = 'none';
+
+  if (!aceite.checked) {
+    msgWarn.innerText = '⚠️ É necessário aceitar o regulamento.';
+    msgWarn.style.display = 'block';
+    return;
+  }
 
   const payload = {
     nome: nome.value,
@@ -281,27 +297,32 @@ form.addEventListener('submit', async e => {
     aceite: aceite.checked
   };
 
-  const r = await fetch(GAS_WEB_APP_URL,{
-    method:'POST',
-    body: JSON.stringify(payload)
-  });
+  try {
+    const r = await fetch(GAS_WEB_APP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
 
-  const j = await r.json();
+    const json = await r.json();
 
-  if(j.success){
-    msgSuccess.innerText = `✅ Inscrição enviada! Nº ${j.code}`;
-    msgSuccess.style.display='block';
-    msgWarn.style.display='none';
-    form.reset();
-    aceite.disabled=true;
-  } else {
-    msgWarn.innerText = j.message;
-    msgWarn.style.display='block';
-    msgSuccess.style.display='none';
+    if (json.success) {
+      msgSuccess.innerText = `✅ Inscrição enviada com sucesso!\nNº ${json.code}`;
+      msgSuccess.style.display = 'block';
+      form.reset();
+      aceite.disabled = true;
+    } else {
+      msgWarn.innerText = json.message || 'Erro ao enviar inscrição';
+      msgWarn.style.display = 'block';
+    }
+
+  } catch (err) {
+    msgWarn.innerText = '❌ Erro de conexão. Tente novamente.';
+    msgWarn.style.display = 'block';
   }
 });
 </script>
 
+
 </body>
 </html>
-
