@@ -101,6 +101,7 @@ button.secondary {
   border-radius: 8px;
   text-align: center;
   font-weight: bold;
+  white-space: pre-line;
 }
 
 .success { background: #e6fffa; color: #065f46; }
@@ -177,14 +178,13 @@ footer {
 </div>
 
 <div class="full">
-  <label>Amadrinhador</label>
-  <select id="amadrinhador" required>
-    <option value="">— selecione —</option>
-    <option value="true">Sim</option>
-    <option value="false">Não</option>
-  </select>
+<label>Amadrinhador</label>
+<select id="amadrinhador" required>
+<option value="">— selecione —</option>
+<option value="true">Sim</option>
+<option value="false">Não</option>
+</select>
 </div>
-
 
 <div>
 <label>Telefone (WhatsApp)</label>
@@ -209,7 +209,7 @@ footer {
 </div>
 
 <div class="full checkbox-row">
-<input type="checkbox" id="aceite" disabled required>
+<input type="checkbox" id="aceite" disabled>
 <label for="aceite">Li e aceito o regulamento</label>
 </div>
 
@@ -237,7 +237,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbz-QNCb2xAr50tXpAlhVAPt9pmgqaPB1e9RnEwf2i92Kk7SpoQ8AIHXW75RY9VxDNPUpA/exec";
+"https://script.google.com/macros/s/AKfycbxjdNvHSlDSYoKRex6qHYMMCKnlmpxJiQcKOAUGJZNQiRVc1tqBZ1-sluc_UUbNMHs9WQ/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -266,7 +266,7 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-// 📄 LIBERA ACEITE APÓS DOWNLOAD
+// 📄 LIBERA ACEITE
 document.getElementById('btnRegulamento').onclick = () => {
   aceite.disabled = false;
 };
@@ -303,7 +303,6 @@ form.addEventListener('submit', async e => {
   try {
     const r = await fetch(GAS_WEB_APP_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
@@ -333,8 +332,5 @@ form.addEventListener('submit', async e => {
 });
 </script>
 
-
-
 </body>
 </html>
-
