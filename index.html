@@ -1,338 +1,305 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Inscrição — 2º Chama's da Poesia</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Inscrição — 2º Chama's da Poesia</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background: #FFDEAD;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+header img { width: 100%; display: block; }
+header h1 { text-align: center; margin: 20px 10px 5px; }
+header p { text-align: center; margin-bottom: 15px; color: #555; }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #FFDEAD;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
+#contador {
+  background: #ff0000;
+  color: #000;
+  text-align: center;
+  padding: 14px;
+  font-weight: bold;
+}
+#contador.encerrado { background: #7f1d1d; color:#fff; }
 
-    .container {
-      max-width: 880px;
-      width: 100%;
-      margin: 0 auto 40px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      overflow: hidden;
-    }
+main { padding: 24px; }
 
-    header img { width: 100%; display: block; }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.full { grid-column: 1 / -1; }
 
-    header h1 {
-      text-align: center;
-      margin: 20px 10px 5px;
-    }
+label { font-size: 14px; display: block; margin-bottom: 6px; }
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-    header p {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #555;
-    }
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
 
-    /* CONTADOR */
-    #contador {
-      background: #ff0000;
-      color: #070000;
-      text-align: center;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: 600;
-    }
+.download-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
 
-    #contador.encerrado {
-      background: #7f1d1d;
-    }
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
 
-    main { padding: 24px; }
+button {
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+button.secondary {
+  background: #eee;
+  color: #000;
+}
 
-    .full { grid-column: 1 / -1; }
+.msg {
+  display: none;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+}
 
-    label {
-      font-size: 14px;
-      display: block;
-      margin-bottom: 6px;
-    }
+.success { background: #e6fffa; color: #065f46; }
+.warn { background: #fff4e5; color: #92400e; }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+footer {
+  text-align: center;
+  font-size: 13px;
+  padding: 14px;
+  border-top: 1px solid #ddd;
+}
 
-    .checkbox-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .download-link {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px dashed #ccc;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000;
-    }
-
-    button {
-      background: #0f172a;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    button.secondary {
-      background: #eee;
-      color: #000;
-    }
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .msg {
-      display: none;
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .success { background: #e6fffa; color: #065f46; }
-    .warn { background: #fff4e5; color: #92400e; }
-
-    footer {
-      text-align: center;
-      font-size: 13px;
-      padding: 14px;
-      border-top: 1px solid #ddd;
-    }
-
-    @media(max-width:700px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-  </style>
+@media(max-width:700px){
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 
 <body>
 <div class="container">
 
-  <header>
-    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
-    <h1>Inscrição — 2º Chama's da Poesia</h1>
-    <p>Preencha todos os campos e aceite o regulamento. (inscrições até 10/02/2026)</p>
-  </header>
+<header>
+  <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
+  <h1>Inscrição — 2º Chama's da Poesia</h1>
+  <p>Preencha todos os campos (inscrições até 10/02/2026)</p>
+</header>
 
-  <!-- CONTADOR -->
-  <div id="contador">
-    ⏳ Inscrições encerram em <span id="tempoRestante"></span>
-  </div>
+<div id="contador">
+ ⏳ Inscrições encerram em <span id="tempoRestante"></span>
+</div>
 
-  <main>
-    <form id="ficha">
-      <div class="grid">
+<main>
+<form id="ficha">
 
-        <div class="full">
-          <label>Nome do concorrente</label>
-          <input id="nome" required>
-        </div>
+<div class="grid">
 
-        <div class="full">
-          <label>Modalidade</label>
-          <select id="modalidade" required>
-            <option value="">— selecione —</option>
-            <option>Prenda Mirim</option>
-            <option>Peão Mirim</option>
-            <option>Prenda Juvenil</option>
-            <option>Peão Juvenil</option>
-            <option>Prenda Adulta</option>
-            <option>Peão Adulto</option>
-            <option>Prenda Veterana</option>
-            <option>Peão Veterano</option>
-            <option>Prenda Xirua</option>
-            <option>Peão Xirú</option>
-          </select>
-        </div>
+<div class="full">
+<label>Nome do Concorrente</label>
+<input id="nome" required>
+</div>
 
-        <div class="full">
-          <label>Entidade Tradicionalista</label>
-          <input id="entidade" required>
-        </div>
+<div class="full">
+<label>Modalidade</label>
+<select id="modalidade" required>
+<option value="">— selecione —</option>
+<option>Prenda Pré-Mirim</option>
+<option>Peão Pré-Mirim</option>
+<option>Prenda Mirim</option>
+<option>Peão Mirim</option>
+<option>Prenda Juvenil</option>
+<option>Peão Juvenil</option>
+<option>Prenda Adulta</option>
+<option>Peão Adulto</option>
+<option>Prenda Veterana</option>
+<option>Peão Veterano</option>
+<option>Prenda Xiru</option>
+<option>Peão Xiru</option>
+</select>
+</div>
 
-        <div>
-          <label>Cidade</label>
-          <input id="cidade" required>
-        </div>
+<div class="full">
+<label>Entidade Tradicionalista</label>
+<input id="entidade" required>
+</div>
 
-        <div>
-          <label>Região Tradicionalista</label>
-          <input id="regiao" required>
-        </div>
+<div>
+<label>Cidade</label>
+<input id="cidade" required>
+</div>
 
-        <div>
-          <label>Data de nascimento</label>
-          <input type="date" id="nascimento" required>
-        </div>
+<div>
+<label>Região Tradicionalista</label>
+<input id="regiao" required>
+</div>
 
-        <div>
-          <label>Cartão Tradicionalista</label>
-          <input id="cartao" required>
-        </div>
+<div class="full">
+<label>Amadrinhador</label>
+<select id="amadrinhador" required>
+<option value="">— selecione —</option>
+<option value="true">SIM</option>
+<option value="false">NÃO</option>
+</select>
+</div>
 
-        <div>
-          <label>Telefone (WhatsApp)</label>
-          <input id="telefone" required>
-        </div>
+<div>
+<label>Telefone (WhatsApp)</label>
+<input id="telefone" required>
+</div>
 
-        <div class="full">
-          <label>E-mail</label>
-          <input type="email" id="email" required>
-        </div>
+<div>
+<label>E-mail</label>
+<input type="email" id="email" required>
+</div>
 
-        <!-- REGULAMENTO -->
-        <div class="full" style="text-align:center;">
-          <a
-            href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download"
-            target="_blank"
-            class="download-link"
-            id="btnRegulamento">
-            📄 Baixar regulamento
-          </a>
-        </div>
+<div class="full">
+<label>Cartão Tradicionalista</label>
+<input id="cartao" required>
+</div>
 
-        <small class="full" style="text-align:center;color:#666;">
-          Para aceitar, é obrigatório baixar o regulamento.
-        </small>
+<div class="full" style="text-align:center;">
+<a href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download"
+   target="_blank" class="download-link" id="btnRegulamento">
+📄 Baixar regulamento
+</a>
+</div>
 
-        <div class="full checkbox-row">
-          <input type="checkbox" id="aceite" disabled required>
-          <label for="aceite">Li e aceito o regulamento</label>
-        </div>
+<div class="full checkbox-row">
+<input type="checkbox" id="aceite" disabled required>
+<label for="aceite">Li e aceito o regulamento</label>
+</div>
 
-      </div>
+</div>
 
-      <div class="controls">
-        <button type="submit">Enviar inscrição</button>
-        <button type="button" class="secondary"
-          onclick="window.location.href='https://www.ctgchamanativa.com.br'">
-          Voltar ao site
-        </button>
-      </div>
+<div class="controls">
+<button type="submit">Enviar inscrição</button>
+<button type="button" class="secondary"
+ onclick="window.location.href='https://www.ctgchamanativa.com.br'">
+Voltar ao site
+</button>
+</div>
 
-      <div id="msgSuccess" class="msg success"></div>
-      <div id="msgWarn" class="msg warn"></div>
+<div id="msgSuccess" class="msg success"></div>
+<div id="msgWarn" class="msg warn"></div>
 
-    </form>
-  </main>
+</form>
+</main>
 
-  <footer>
-    CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação V.001
-  </footer>
+<footer>
+CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
+</footer>
 
 </div>
 
 <script>
-  const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwauIMuwNxcOOtBenI8SaTHkWU3yxUy7RlyhKV9ydcOr4wp8NY3aTS3P3hZzE6hdAnhMA/exec";
+const GAS_WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbxN1E8o_e1Y29PFaZYKt-eZVEuyglntLggkpiAL7pZfIUp8gPCs_npjXOk7P0obe_1wdA/exec";
 
-  const encerramento = new Date('2026-02-10T23:59:59-03:00');
-  const tempoSpan = document.getElementById('tempoRestante');
-  const contadorDiv = document.getElementById('contador');
-  const form = document.getElementById('ficha');
-  const checkboxAceite = document.getElementById('aceite');
+const encerramento = new Date('2026-02-10T23:59:59-03:00');
+const tempoSpan = document.getElementById('tempoRestante');
+const contadorDiv = document.getElementById('contador');
+const form = document.getElementById('ficha');
+const aceite = document.getElementById('aceite');
 
-  // CONTADOR
-  function atualizarContador() {
-    const agora = new Date();
-    const diff = encerramento - agora;
-
-    if (diff <= 0) {
-      contadorDiv.classList.add('encerrado');
-      tempoSpan.innerText = 'INSCRIÇÕES ENCERRADAS';
-      form.style.display = 'none';
-      return;
-    }
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    tempoSpan.innerText = `${d}d ${h}h ${m}m ${s}s`;
+function atualizarContador(){
+  const diff = encerramento - new Date();
+  if(diff <= 0){
+    contadorDiv.classList.add('encerrado');
+    tempoSpan.innerText = 'INSCRIÇÕES ENCERRADAS';
+    form.style.display = 'none';
+    return;
   }
+  const d=Math.floor(diff/86400000),
+        h=Math.floor(diff/3600000)%24,
+        m=Math.floor(diff/60000)%60,
+        s=Math.floor(diff/1000)%60;
+  tempoSpan.innerText = `${d}d ${h}h ${m}m ${s}s`;
+}
+setInterval(atualizarContador,1000);
+atualizarContador();
 
-  atualizarContador();
-  setInterval(atualizarContador, 1000);
+document.getElementById('btnRegulamento').onclick = () => {
+  aceite.disabled = false;
+};
 
-  // LIBERAR ACEITE
-  document.getElementById('btnRegulamento').onclick = () => {
-    checkboxAceite.disabled = false;
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const payload = {
+    nome: nome.value,
+    modalidade: modalidade.value,
+    entidade: entidade.value,
+    cidade: cidade.value,
+    regiao: regiao.value,
+    amadrinhador: amadrinhador.value === 'true',
+    telefone: telefone.value,
+    email: email.value,
+    cartao: cartao.value,
+    aceite: aceite.checked
   };
 
-  // SUBMIT
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const data = {
-      nome: nome.value,
-      modalidade: modalidade.value,
-      entidade: entidade.value,
-      cidade: cidade.value,
-      regiao: regiao.value,
-      nascimento: nascimento.value,
-      cartao: cartao.value,
-      telefone: telefone.value,
-      email: email.value,
-      aceite: checkboxAceite.checked
-    };
-
-    const res = await fetch(GAS_WEB_APP_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(data)
-    });
-
-    const json = await res.json();
-
-    if (json.success) {
-      document.getElementById('msgSuccess').innerText =
-        '✅ Inscrição realizada com sucesso!';
-      document.getElementById('msgSuccess').style.display = 'block';
-      form.reset();
-      checkboxAceite.disabled = true;
-    } else {
-      document.getElementById('msgWarn').innerText = json.message;
-      document.getElementById('msgWarn').style.display = 'block';
-    }
+  const r = await fetch(GAS_WEB_APP_URL,{
+    method:'POST',
+    body: JSON.stringify(payload)
   });
+
+  const j = await r.json();
+
+  if(j.success){
+    msgSuccess.innerText = `✅ Inscrição enviada! Nº ${j.code}`;
+    msgSuccess.style.display='block';
+    msgWarn.style.display='none';
+    form.reset();
+    aceite.disabled=true;
+  } else {
+    msgWarn.innerText = j.message;
+    msgWarn.style.display='block';
+    msgSuccess.style.display='none';
+  }
+});
 </script>
 
 </body>
