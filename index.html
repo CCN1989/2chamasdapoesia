@@ -290,6 +290,7 @@ form.addEventListener('submit', async e => {
 
  const payload = {
   nome: nome.value,
+  cartao: cartao.value,
   categoria: categoria.value, // ✅ CORRETO
   entidade: entidade.value,
   cidade: cidade.value,
@@ -297,7 +298,6 @@ form.addEventListener('submit', async e => {
   amadrinhador: amadrinhador.value === 'true',
   telefone: telefone.value,
   email: email.value,
-  cartao: cartao.value,
   aceite: true
 };
 
@@ -336,6 +336,7 @@ form.addEventListener('submit', async e => {
 
 </body>
 </html>
+
 
 
 
