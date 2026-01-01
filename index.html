@@ -238,7 +238,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzzgHa50R9WnTYNFNsLZOhDD_JjSmMguiSl5eatbvBTc0LH8d_8PVmV-50Ch6_lepG-jw/exec";
+"https://script.google.com/macros/s/AKfycbxKNSl3otqfqBeo8_MAAOJcdao-5b-drVDKK5tv2bjx8A03immhPR_2ufircFRoIc9TOg/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -288,18 +288,19 @@ form.addEventListener('submit', async e => {
   btnSubmit.disabled = true;
   btnSubmit.innerText = 'Enviando...';
 
-  const payload = {
-    nome: nome.value,
-    categoria: categoria.value,
-    entidade: entidade.value,
-    cidade: cidade.value,
-    regiao: regiao.value,
-    amadrinhador: amadrinhador.value === 'true',
-    telefone: telefone.value,
-    email: email.value,
-    cartao: cartao.value,
-    aceite: true
-  };
+ const payload = {
+  nome: nome.value,
+  categoria: categoria.value, // ✅ CORRETO
+  entidade: entidade.value,
+  cidade: cidade.value,
+  regiao: regiao.value,
+  amadrinhador: amadrinhador.value === 'true',
+  telefone: telefone.value,
+  email: email.value,
+  cartao: cartao.value,
+  aceite: true
+};
+
 
   try {
     const r = await fetch(GAS_WEB_APP_URL, {
@@ -335,6 +336,7 @@ form.addEventListener('submit', async e => {
 
 </body>
 </html>
+
 
 
 
