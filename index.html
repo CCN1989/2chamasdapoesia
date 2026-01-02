@@ -79,7 +79,8 @@
 </div>
 
 <script>
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzqYajohQFoDD0BaO-5ERqYLstoer0R7vu6R-BT02rQoi3Zb8PWxRYXUcuoO6GliY_Jzg/exec";
+// Certifique-se de que esta URL é a da sua última implantação (Nova Versão)
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrEIp51cSbIzqLaZj1LVKhEY_DdNYcnlefQq6OMOyXlnsL2kQXwnXMUYBgqQ5IhiFBCw/exec";
 
 // Contador
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
@@ -99,15 +100,23 @@ document.getElementById('ficha').onsubmit = async (e) => {
   const btn = document.getElementById('btnSubmit');
   const msgS = document.getElementById('msgSuccess');
   const msgW = document.getElementById('msgWarn');
+  const aceite = document.getElementById('aceite');
   
   btn.disabled = true; btn.innerText = "Enviando...";
   msgS.style.display = msgW.style.display = 'none';
 
-  const rawDate = document.getElementById('nascimento').value.split('-');
+  // Tratamento da data
+  const inputData = document.getElementById('nascimento').value;
+  let dataFormatada = "";
+  if (inputData) {
+    const parts = inputData.split('-');
+    dataFormatada = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  }
+
   const payload = {
     nome: document.getElementById('nome').value,
     categoria: document.getElementById('categoria').value,
-    nascimento: `${rawDate[2]}/${rawDate[1]}/${rawDate[0]}`,
+    nascimento: dataFormatada,
     entidade: document.getElementById('entidade').value,
     cidade: document.getElementById('cidade').value,
     regiao: document.getElementById('regiao').value,
@@ -118,28 +127,38 @@ document.getElementById('ficha').onsubmit = async (e) => {
   };
 
   try {
-    const resp = await fetch(GAS_WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const resp = await fetch(GAS_WEB_APP_URL, { 
+      method: 'POST', 
+      body: JSON.stringify(payload) 
+    });
+    
     const res = await resp.json();
+    
     if (res.success) {
       msgS.innerText = `✅ SUCESSO!\nNúmero de Inscrição: ${res.code}\n${res.espera ? '⚠️ Você está na lista de espera.' : 'Inscrição confirmada.'}`;
       msgS.style.display = 'block';
       document.getElementById('ficha').reset();
+      aceite.disabled = true;
     } else {
-      msgW.innerText = "⚠️ " + res.message; msgW.style.display = 'block';
+      msgW.innerText = "⚠️ " + res.message; 
+      msgW.style.display = 'block';
     }
   } catch (e) {
-    // Plano B: Se a planilha gravou mas o navegador bloqueou a resposta
-    msgS.innerText = "✅ Inscrição Enviada!\n\nVerifique seu e-mail em alguns minutos para confirmar seu número de inscrição.";
+    // Caso ocorra erro de CORS, mas a planilha tenha recebido (como você relatou antes)
+    msgS.innerText = "✅ Inscrição Enviada!\n\nVerifique seu e-mail em alguns minutos para confirmar seu número de inscrição e os dados.";
     msgS.style.display = 'block';
     document.getElementById('ficha').reset();
+    aceite.disabled = true;
   } finally {
-    btn.disabled = false; btn.innerText = "Enviar Inscrição";
-    window.scrollTo({top:0, behavior:'smooth'});
+    btn.disabled = false; 
+    btn.innerText = "Enviar Inscrição";
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 };
 </script>
 </body>
 </html>
+
 
 
 
