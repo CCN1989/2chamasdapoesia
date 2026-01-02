@@ -101,7 +101,6 @@ button.secondary {
   border-radius: 8px;
   text-align: center;
   font-weight: bold;
-  white-space: pre-line;
 }
 
 .success { background: #e6fffa; color: #065f46; }
@@ -144,22 +143,21 @@ footer {
 </div>
 
 <div class="full">
-<label>Categoria</label>
-<select id="categoria" required>
+<label>Modalidade</label>
+<select id="modalidade" required>
 <option value="">— selecione —</option>
-<option value="Prenda Pré-Mirim">Prenda Pré-Mirim</option>
-<option value="Peão Pré-Mirim">Peão Pré-Mirim</option>
-<option value="Prenda Mirim">Prenda Mirim</option>
-<option value="Peão Mirim">Peão Mirim</option>
-<option value="Prenda Juvenil">Prenda Juvenil</option>
-<option value="Peão Juvenil">Peão Juvenil</option>
-<option value="Prenda Adulta">Prenda Adulta</option>
-<option value="Peão Adulto">Peão Adulto</option>
-<option value="Prenda Veterana">Prenda Veterana</option>
-<option value="Peão Veterano">Peão Veterano</option>
-<option value="Prenda Xiru">Prenda Xiru</option>
-<option value="Peão Xiru">Peão Xiru</option>
-
+<option>Prenda Pré-Mirim</option>
+<option>Peão Pré-Mirim</option>
+<option>Prenda Mirim</option>
+<option>Peão Mirim</option>
+<option>Prenda Juvenil</option>
+<option>Peão Juvenil</option>
+<option>Prenda Adulta</option>
+<option>Peão Adulto</option>
+<option>Prenda Veterana</option>
+<option>Peão Veterano</option>
+<option>Prenda Xiru</option>
+<option>Peão Xiru</option>
 </select>
 </div>
 
@@ -179,13 +177,14 @@ footer {
 </div>
 
 <div class="full">
-<label>Amadrinhador</label>
-<select id="amadrinhador" required>
-<option value="">— selecione —</option>
-<option value="true">Sim</option>
-<option value="false">Não</option>
-</select>
+  <label>Amadrinhador</label>
+  <select id="amadrinhador" required>
+    <option value="">— selecione —</option>
+    <option value="true">Sim</option>
+    <option value="false">Não</option>
+  </select>
 </div>
+
 
 <div>
 <label>Telefone (WhatsApp)</label>
@@ -210,7 +209,7 @@ footer {
 </div>
 
 <div class="full checkbox-row">
-<input type="checkbox" id="aceite" disabled>
+<input type="checkbox" id="aceite" disabled required>
 <label for="aceite">Li e aceito o regulamento</label>
 </div>
 
@@ -238,7 +237,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyT-3tgYzWfJq-_YJp5KfuDQt9q9Ekxl4WpHWGd58Y_yluRv09voMM9KfVTvlgXQX77bQ/exec";
+"https://script.google.com/macros/s/AKfycbzlRCwX8ULSgMOXcB6zuZ1NGCz5moAAM8h4UxYJNN-UK5qXu1a_PcbAWJEwf8pv5kWycg/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -267,7 +266,7 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-// 📄 LIBERA ACEITE
+// 📄 LIBERA ACEITE APÓS DOWNLOAD
 document.getElementById('btnRegulamento').onclick = () => {
   aceite.disabled = false;
 };
@@ -288,28 +287,25 @@ form.addEventListener('submit', async e => {
   btnSubmit.disabled = true;
   btnSubmit.innerText = 'Enviando...';
 
- const payload = {
-  nome: nome.value,
-  cartao: cartao.value,
-  categoria: categoria.value, // ✅ CORRETO
-  entidade: entidade.value,
-  cidade: cidade.value,
-  regiao: regiao.value,
-  amadrinhador: amadrinhador.value === 'true',
-  telefone: telefone.value,
-  email: email.value,
-  aceite: true
-};
-
+  const payload = {
+    nome: nome.value,
+    modalidade: modalidade.value,
+    entidade: entidade.value,
+    cidade: cidade.value,
+    regiao: regiao.value,
+    amadrinhador: amadrinhador.value === 'true',
+    telefone: telefone.value,
+    email: email.value,
+    cartao: cartao.value,
+    aceite: true
+  };
 
   try {
- const r = await fetch(GAS_WEB_APP_URL, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(payload)
-});
+    const r = await fetch(GAS_WEB_APP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
 
     const json = await r.json();
 
@@ -337,11 +333,10 @@ form.addEventListener('submit', async e => {
 });
 </script>
 
+
+
 </body>
 </html>
-
-
-
 
 
 
