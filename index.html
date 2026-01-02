@@ -18,8 +18,8 @@ header p { text-align: center; margin-bottom: 15px; color: #555; }
 main { padding: 24px; }
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .full { grid-column: 1 / -1; }
-label { font-size: 14px; display: block; margin-bottom: 6px; }
-input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+label { font-size: 14px; display: block; margin-bottom: 6px; font-weight: bold; }
+input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: inherit; }
 .checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .download-link { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 10px; border: 1px dashed #ccc; font-weight: bold; text-decoration: none; color: #000; }
 .controls { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
@@ -71,6 +71,11 @@ footer { text-align: center; font-size: 13px; padding: 14px; border-top: 1px sol
 <option>Prenda Xiru</option>
 <option>Peão Xiru</option>
 </select>
+</div>
+
+<div class="full">
+<label>Data de Nascimento</label>
+<input type="date" id="nascimento" required>
 </div>
 
 <div class="full">
@@ -144,8 +149,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 </div>
 
 <script>
-// ATENÇÃO: Verifique se esta URL é a da versão mais recente publicada como "Qualquer pessoa"
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwV1wCmoNKKCNHIlWHZCGcsysgg2aCVXjLymmjogOEpkrhD_LY6StWiG1wBIysLwhlKfw/exec";
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxyrGDn1t-mEbXWgyzTY_vSfQoy4DRVVYWxbIUe2yqq_lsKHnuViWcFltykFBvAUTCLlA/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -195,9 +199,15 @@ form.addEventListener('submit', async e => {
   btnSubmit.disabled = true;
   btnSubmit.innerText = 'Enviando...';
 
+  // Formatando data para o padrão DD/MM/YYYY antes de enviar
+  const rawDate = document.getElementById('nascimento').value;
+  const dateParts = rawDate.split('-');
+  const dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+
   const payload = {
     nome: document.getElementById('nome').value,
     categoria: document.getElementById('categoria').value,
+    nascimento: dataFormatada, // Envia a data formatada
     entidade: document.getElementById('entidade').value,
     cidade: document.getElementById('cidade').value,
     regiao: document.getElementById('regiao').value,
@@ -208,10 +218,9 @@ form.addEventListener('submit', async e => {
   };
 
   try {
-    // Mudança crucial: enviando como POST simples sem headers complexos
     const response = await fetch(GAS_WEB_APP_URL, {
       method: 'POST',
-      mode: 'cors', // Google Apps Script suporta CORS se publicado corretamente
+      mode: 'cors',
       body: JSON.stringify(payload)
     });
 
@@ -243,6 +252,7 @@ form.addEventListener('submit', async e => {
 </script>
 </body>
 </html>
+
 
 
 
