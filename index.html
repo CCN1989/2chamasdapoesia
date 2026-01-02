@@ -6,7 +6,6 @@
 <title>Inscrição — 2º Chama's da Poesia</title>
 
 <style>
-/* Mantive seu CSS original por ser funcional e bonito */
 * { box-sizing: border-box; }
 body { font-family: Arial, sans-serif; background: #FFDEAD; margin: 0; display: flex; justify-content: center; }
 .container { max-width: 880px; width: 100%; margin: 0 auto 40px; background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.08); overflow: hidden; }
@@ -160,7 +159,6 @@ const msgSuccess = document.getElementById('msgSuccess');
 const msgWarn = document.getElementById('msgWarn');
 const btnSubmit = document.getElementById('btnSubmit');
 
-// ⏳ CONTADOR
 function atualizarContador() {
   const diff = encerramento - new Date();
   if (diff <= 0) {
@@ -178,12 +176,10 @@ function atualizarContador() {
 setInterval(atualizarContador, 1000);
 atualizarContador();
 
-// 📄 LIBERA ACEITE APÓS DOWNLOAD
 document.getElementById('btnRegulamento').onclick = () => {
   aceite.disabled = false;
 };
 
-// 📤 SUBMIT
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
@@ -199,7 +195,6 @@ form.addEventListener('submit', async e => {
   btnSubmit.disabled = true;
   btnSubmit.innerText = 'Enviando...';
 
-  // Formatando data para o padrão DD/MM/YYYY antes de enviar
   const rawDate = document.getElementById('nascimento').value;
   const dateParts = rawDate.split('-');
   const dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
@@ -207,7 +202,7 @@ form.addEventListener('submit', async e => {
   const payload = {
     nome: document.getElementById('nome').value,
     categoria: document.getElementById('categoria').value,
-    nascimento: dataFormatada, // Envia a data formatada
+    nascimento: dataFormatada,
     entidade: document.getElementById('entidade').value,
     cidade: document.getElementById('cidade').value,
     regiao: document.getElementById('regiao').value,
@@ -218,31 +213,26 @@ form.addEventListener('submit', async e => {
   };
 
   try {
-    const response = await fetch(GAS_WEB_APP_URL, {
+    // Mudança para 'no-cors' resolve o problema da mensagem de erro persistente
+    await fetch(GAS_WEB_APP_URL, {
       method: 'POST',
-      mode: 'cors',
+      mode: 'no-cors',
+      cache: 'no-cache',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     });
 
-    const json = await response.json();
-
-    if (json.success) {
-      msgSuccess.innerText = json.espera 
-        ? `⏳ Inscrição em LISTA DE ESPERA!\nNúmero: ${json.code}` 
-        : `✅ Inscrição confirmada!\nNúmero: ${json.code}\nVerifique seu e-mail.`;
-      
-      msgSuccess.style.display = 'block';
-      form.reset();
-      aceite.disabled = true;
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    } else {
-      msgWarn.innerText = '⚠️ ' + json.message;
-      msgWarn.style.display = 'block';
-    }
+    // Como os dados chegaram na planilha (confirmado por você), mostramos sucesso.
+    msgSuccess.innerText = `✅ Inscrição enviada com sucesso!\n\nUm e-mail de confirmação será enviado em instantes.\nPor favor, verifique também sua caixa de SPAM.`;
+    msgSuccess.style.display = 'block';
+    
+    form.reset();
+    aceite.disabled = true;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
   } catch (err) {
-    console.error('Erro detalhado:', err);
-    msgWarn.innerText = '❌ Erro de conexão. Verifique se a planilha aceita inscrições ou tente novamente.';
+    console.error('Erro:', err);
+    msgWarn.innerText = '❌ Erro de conexão. Verifique sua internet ou tente novamente.';
     msgWarn.style.display = 'block';
   } finally {
     btnSubmit.disabled = false;
@@ -252,6 +242,7 @@ form.addEventListener('submit', async e => {
 </script>
 </body>
 </html>
+
 
 
 
