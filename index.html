@@ -6,122 +6,36 @@
 <title>Inscrição — 2º Chama's da Poesia</title>
 
 <style>
+/* Mantive seu CSS original por ser funcional e bonito */
 * { box-sizing: border-box; }
-body {
-  font-family: Arial, sans-serif;
-  background: #FFDEAD;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-}
-.container {
-  max-width: 880px;
-  width: 100%;
-  margin: 0 auto 40px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,.08);
-  overflow: hidden;
-}
+body { font-family: Arial, sans-serif; background: #FFDEAD; margin: 0; display: flex; justify-content: center; }
+.container { max-width: 880px; width: 100%; margin: 0 auto 40px; background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.08); overflow: hidden; }
 header img { width: 100%; display: block; }
 header h1 { text-align: center; margin: 20px 10px 5px; }
 header p { text-align: center; margin-bottom: 15px; color: #555; }
-
-#contador {
-  background: #ff0000;
-  color: #000;
-  text-align: center;
-  padding: 14px;
-  font-weight: bold;
-}
+#contador { background: #ff0000; color: #000; text-align: center; padding: 14px; font-weight: bold; }
 #contador.encerrado { background: #7f1d1d; color:#fff; }
-
 main { padding: 24px; }
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .full { grid-column: 1 / -1; }
-
 label { font-size: 14px; display: block; margin-bottom: 6px; }
-input, select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.download-link {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px dashed #ccc;
-  font-weight: bold;
-  text-decoration: none;
-  color: #000;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-button {
-  background: #0f172a;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: #eee;
-  color: #000;
-}
-
-.msg {
-  display: none;
-  margin-top: 16px;
-  padding: 12px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.success { background: #e6fffa; color: #065f46; }
-.warn { background: #fff4e5; color: #92400e; }
-
-footer {
-  text-align: center;
-  font-size: 13px;
-  padding: 14px;
-  border-top: 1px solid #ddd;
-}
-
-@media(max-width:700px){
-  .grid { grid-template-columns: 1fr; }
-}
+input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
+.checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.download-link { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 10px; border: 1px dashed #ccc; font-weight: bold; text-decoration: none; color: #000; }
+.controls { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+button { background: #0f172a; color: #fff; border: none; padding: 12px 20px; border-radius: 10px; font-size: 15px; cursor: pointer; }
+button:disabled { background: #64748b; cursor: not-allowed; }
+button.secondary { background: #eee; color: #000; }
+.msg { display: none; margin-top: 16px; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; white-space: pre-wrap; }
+.success { background: #e6fffa; color: #065f46; border: 1px solid #34d399; }
+.warn { background: #fff4e5; color: #92400e; border: 1px solid #fbbf24; }
+footer { text-align: center; font-size: 13px; padding: 14px; border-top: 1px solid #ddd; }
+@media(max-width:700px){ .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 
 <body>
 <div class="container">
-
 <header>
   <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
   <h1>Inscrição — 2º Chama's da Poesia</h1>
@@ -134,9 +48,7 @@ footer {
 
 <main>
 <form id="ficha">
-
 <div class="grid">
-
 <div class="full">
 <label>Nome do Concorrente</label>
 <input id="nome" required>
@@ -185,7 +97,6 @@ footer {
   </select>
 </div>
 
-
 <div>
 <label>Telefone (WhatsApp)</label>
 <input id="telefone" required>
@@ -212,11 +123,10 @@ footer {
 <input type="checkbox" id="aceite" disabled required>
 <label for="aceite">Li e aceito o regulamento</label>
 </div>
-
 </div>
 
 <div class="controls">
-<button type="submit">Enviar inscrição</button>
+<button type="submit" id="btnSubmit">Enviar inscrição</button>
 <button type="button" class="secondary"
  onclick="window.location.href='https://www.ctgchamanativa.com.br'">
 Voltar ao site
@@ -225,19 +135,17 @@ Voltar ao site
 
 <div id="msgSuccess" class="msg success"></div>
 <div id="msgWarn" class="msg warn"></div>
-
 </form>
 </main>
 
 <footer>
 CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 </footer>
-
 </div>
 
 <script>
-const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzslGt1KjIYu8UVcyGMWmhinL6SbcVoNTkWk_opWsXc8BREHWklblvtK6Tsms0Y_y0pGg/exec";
+// ATENÇÃO: Verifique se esta URL é a da versão mais recente publicada como "Qualquer pessoa"
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz0FcBFYIOfGTjj3t2N15sQcokDJ1F5fIOE9GKEX_mPqa8k6vZ6sSAf2qo1Z7mik4D25Q/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -246,7 +154,7 @@ const form = document.getElementById('ficha');
 const aceite = document.getElementById('aceite');
 const msgSuccess = document.getElementById('msgSuccess');
 const msgWarn = document.getElementById('msgWarn');
-const btnSubmit = form.querySelector('button[type="submit"]');
+const btnSubmit = document.getElementById('btnSubmit');
 
 // ⏳ CONTADOR
 function atualizarContador() {
@@ -288,43 +196,44 @@ form.addEventListener('submit', async e => {
   btnSubmit.innerText = 'Enviando...';
 
   const payload = {
-    nome: nome.value,
-    categoria: categoria.value,
-    entidade: entidade.value,
-    cidade: cidade.value,
-    regiao: regiao.value,
-    amadrinhador: amadrinhador.value === 'true',
-    telefone: telefone.value,
-    email: email.value,
-    cartao: cartao.value,
-    aceite: true
+    nome: document.getElementById('nome').value,
+    categoria: document.getElementById('categoria').value,
+    entidade: document.getElementById('entidade').value,
+    cidade: document.getElementById('cidade').value,
+    regiao: document.getElementById('regiao').value,
+    amadrinhador: document.getElementById('amadrinhador').value === 'true',
+    telefone: document.getElementById('telefone').value,
+    email: document.getElementById('email').value,
+    cartao: document.getElementById('cartao').value
   };
 
   try {
-    const r = await fetch(GAS_WEB_APP_URL, {
+    // Mudança crucial: enviando como POST simples sem headers complexos
+    const response = await fetch(GAS_WEB_APP_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors', // Google Apps Script suporta CORS se publicado corretamente
       body: JSON.stringify(payload)
     });
 
-    const json = await r.json();
+    const json = await response.json();
 
     if (json.success) {
-      msgSuccess.innerText =
-        json.espera
-        ? `⏳ Inscrição realizada em LISTA DE ESPERA.\nNúmero: ${json.code}`
-        : `✅ Inscrição confirmada!\nNúmero: ${json.code}`;
-
+      msgSuccess.innerText = json.espera 
+        ? `⏳ Inscrição em LISTA DE ESPERA!\nNúmero: ${json.code}` 
+        : `✅ Inscrição confirmada!\nNúmero: ${json.code}\nVerifique seu e-mail.`;
+      
       msgSuccess.style.display = 'block';
       form.reset();
       aceite.disabled = true;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     } else {
-      msgWarn.innerText = json.message || 'Erro ao enviar inscrição';
+      msgWarn.innerText = '⚠️ ' + json.message;
       msgWarn.style.display = 'block';
     }
 
   } catch (err) {
-    msgWarn.innerText = '❌ Erro de conexão. Tente novamente.';
+    console.error('Erro detalhado:', err);
+    msgWarn.innerText = '❌ Erro de conexão. Verifique se a planilha aceita inscrições ou tente novamente.';
     msgWarn.style.display = 'block';
   } finally {
     btnSubmit.disabled = false;
@@ -332,11 +241,9 @@ form.addEventListener('submit', async e => {
   }
 });
 </script>
-
-
-
 </body>
 </html>
+
 
 
 
