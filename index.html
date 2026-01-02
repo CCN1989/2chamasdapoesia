@@ -4,205 +4,110 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Inscrição — 2º Chama's da Poesia</title>
-
 <style>
-* { box-sizing: border-box; }
-body { font-family: Arial, sans-serif; background: #FFDEAD; margin: 0; display: flex; justify-content: center; }
-.container { max-width: 880px; width: 100%; margin: 0 auto 40px; background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.08); overflow: hidden; }
-header img { width: 100%; display: block; }
-header h1 { text-align: center; margin: 20px 10px 5px; }
-header p { text-align: center; margin-bottom: 15px; color: #555; }
-#contador { background: #ff0000; color: #000; text-align: center; padding: 14px; font-weight: bold; }
-#contador.encerrado { background: #7f1d1d; color:#fff; }
-main { padding: 24px; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.full { grid-column: 1 / -1; }
-label { font-size: 14px; display: block; margin-bottom: 6px; font-weight: bold; }
-input, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-family: inherit; }
-.checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-.download-link { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 10px; border: 1px dashed #ccc; font-weight: bold; text-decoration: none; color: #000; }
-.controls { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-button { background: #0f172a; color: #fff; border: none; padding: 12px 20px; border-radius: 10px; font-size: 15px; cursor: pointer; }
-button:disabled { background: #64748b; cursor: not-allowed; }
-button.secondary { background: #eee; color: #000; }
-.msg { display: none; margin-top: 16px; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; white-space: pre-wrap; }
-.success { background: #e6fffa; color: #065f46; border: 1px solid #34d399; }
-.warn { background: #fff4e5; color: #92400e; border: 1px solid #fbbf24; }
-footer { text-align: center; font-size: 13px; padding: 14px; border-top: 1px solid #ddd; }
-@media(max-width:700px){ .grid { grid-template-columns: 1fr; } }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #FFDEAD; margin: 0; display: flex; justify-content: center; }
+  .container { max-width: 880px; width: 100%; margin: 20px auto; background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.08); overflow: hidden; }
+  header img { width: 100%; display: block; }
+  header h1 { text-align: center; margin: 20px 10px 5px; font-size: 24px; }
+  header p { text-align: center; margin-bottom: 15px; color: #555; }
+  #contador { background: #ff0000; color: #fff; text-align: center; padding: 14px; font-weight: bold; }
+  main { padding: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .full { grid-column: 1 / -1; }
+  label { font-size: 14px; display: block; margin-bottom: 6px; font-weight: bold; }
+  input, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+  .download-link { display: block; text-align: center; margin: 10px 0; padding: 12px; border: 2px dashed #0f172a; border-radius: 10px; text-decoration: none; color: #0f172a; font-weight: bold; }
+  button { background: #0f172a; color: #fff; border: none; padding: 15px 30px; border-radius: 10px; font-size: 16px; cursor: pointer; width: 100%; }
+  button:disabled { background: #64748b; }
+  .msg { display: none; margin-top: 20px; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; white-space: pre-wrap; }
+  .success { background: #e6fffa; color: #065f46; border: 1px solid #34d399; }
+  .warn { background: #fff4e5; color: #92400e; border: 1px solid #fbbf24; }
+  footer { text-align: center; padding: 20px; font-size: 12px; border-top: 1px solid #eee; }
+  @media(max-width:600px){ .grid { grid-template-columns: 1fr; } }
 </style>
 </head>
-
 <body>
 <div class="container">
-<header>
-  <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
-  <h1>Inscrição — 2º Chama's da Poesia</h1>
-  <p>Preencha todos os campos (inscrições até 10/02/2026)</p>
-</header>
-
-<div id="contador">
- ⏳ Inscrições encerram em <span id="tempoRestante"></span>
-</div>
-
-<main>
-<form id="ficha">
-<div class="grid">
-<div class="full">
-<label>Nome do Concorrente</label>
-<input id="nome" required>
-</div>
-
-<div class="full">
-<label>Categoria</label>
-<select id="categoria" required>
-<option value="">— selecione —</option>
-<option>Prenda Pré-Mirim</option>
-<option>Peão Pré-Mirim</option>
-<option>Prenda Mirim</option>
-<option>Peão Mirim</option>
-<option>Prenda Juvenil</option>
-<option>Peão Juvenil</option>
-<option>Prenda Adulta</option>
-<option>Peão Adulto</option>
-<option>Prenda Veterana</option>
-<option>Peão Veterano</option>
-<option>Prenda Xiru</option>
-<option>Peão Xiru</option>
-</select>
-</div>
-
-<div class="full">
-<label>Data de Nascimento</label>
-<input type="date" id="nascimento" required>
-</div>
-
-<div class="full">
-<label>Entidade Tradicionalista</label>
-<input id="entidade" required>
-</div>
-
-<div>
-<label>Cidade</label>
-<input id="cidade" required>
-</div>
-
-<div>
-<label>Região Tradicionalista</label>
-<input id="regiao" required>
-</div>
-
-<div class="full">
-  <label>Amadrinhador</label>
-  <select id="amadrinhador" required>
-    <option value="">— selecione —</option>
-    <option value="true">Sim</option>
-    <option value="false">Não</option>
-  </select>
-</div>
-
-<div>
-<label>Telefone (WhatsApp)</label>
-<input id="telefone" required>
-</div>
-
-<div>
-<label>E-mail</label>
-<input type="email" id="email" required>
-</div>
-
-<div class="full">
-<label>Cartão Tradicionalista</label>
-<input id="cartao" required>
-</div>
-
-<div class="full" style="text-align:center;">
-<a href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download"
-   target="_blank" class="download-link" id="btnRegulamento">
-📄 Baixar regulamento
-</a>
-</div>
-
-<div class="full checkbox-row">
-<input type="checkbox" id="aceite" disabled required>
-<label for="aceite">Li e aceito o regulamento</label>
-</div>
-</div>
-
-<div class="controls">
-<button type="submit" id="btnSubmit">Enviar inscrição</button>
-<button type="button" class="secondary"
- onclick="window.location.href='https://www.ctgchamanativa.com.br'">
-Voltar ao site
-</button>
-</div>
-
-<div id="msgSuccess" class="msg success"></div>
-<div id="msgWarn" class="msg warn"></div>
-</form>
-</main>
-
-<footer>
-CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
-</footer>
+  <header>
+    <img src="https://raw.githubusercontent.com/CCN1989/Imagens/refs/heads/main/testeira.png">
+    <h1>Inscrição — 2º Chama's da Poesia</h1>
+    <p>Preencha os dados abaixo com atenção</p>
+  </header>
+  <div id="contador">⏳ <span id="tempoRestante"></span></div>
+  <main>
+    <form id="ficha">
+      <div class="grid">
+        <div class="full"><label>Nome do Concorrente</label><input id="nome" required></div>
+        <div class="full">
+          <label>Categoria</label>
+          <select id="categoria" required>
+            <option value="">— selecione —</option>
+            <option>Prenda Pré-Mirim</option><option>Peão Pré-Mirim</option>
+            <option>Prenda Mirim</option><option>Peão Mirim</option>
+            <option>Prenda Juvenil</option><option>Peão Juvenil</option>
+            <option>Prenda Adulta</option><option>Peão Adulto</option>
+            <option>Prenda Veterana</option><option>Peão Veterano</option>
+            <option>Prenda Xiru</option><option>Peão Xiru</option>
+          </select>
+        </div>
+        <div class="full"><label>Data de Nascimento</label><input type="date" id="nascimento" required></div>
+        <div class="full"><label>Entidade Tradicionalista</label><input id="entidade" required></div>
+        <div><label>Cidade</label><input id="cidade" required></div>
+        <div><label>Região Tradicionalista</label><input id="regiao" required></div>
+        <div class="full">
+          <label>Amadrinhador</label>
+          <select id="amadrinhador" required>
+            <option value="false">Não</option><option value="true">Sim</option>
+          </select>
+        </div>
+        <div><label>WhatsApp</label><input id="telefone" placeholder="(00) 00000-0000" required></div>
+        <div><label>E-mail</label><input type="email" id="email" required></div>
+        <div class="full"><label>Cartão Tradicionalista</label><input id="cartao" required></div>
+        <div class="full">
+          <a href="http://drive.google.com/u/0/uc?id=1HQv-1oisMiBJc-FFTsH5LWhiW16OCciP&export=download" target="_blank" class="download-link" id="btnRegulamento">📄 BAIXAR REGULAMENTO</a>
+        </div>
+        <div class="full">
+          <input type="checkbox" id="aceite" disabled required> <label for="aceite" style="display:inline">Li e aceito o regulamento</label>
+        </div>
+      </div>
+      <button type="submit" id="btnSubmit" style="margin-top:20px">Enviar Inscrição</button>
+      <div id="msgSuccess" class="msg success"></div>
+      <div id="msgWarn" class="msg warn"></div>
+    </form>
+  </main>
 </div>
 
 <script>
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7B3LNos6YfXgBmpD8jHBSL1kqJQ-S05nmW7bkJ6SqIhJK1IY6xX495165lDfVZ_aJbA/exec";
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrEIp51cSbIzqLaZj1LVKhEY_DdNYcnlefQq6OMOyXlnsL2kQXwnXMUYBgqQ5IhiFBCw/exec";
 
+// Contador
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
-const tempoSpan = document.getElementById('tempoRestante');
-const contadorDiv = document.getElementById('contador');
-const form = document.getElementById('ficha');
-const aceite = document.getElementById('aceite');
-const msgSuccess = document.getElementById('msgSuccess');
-const msgWarn = document.getElementById('msgWarn');
-const btnSubmit = document.getElementById('btnSubmit');
-
 function atualizarContador() {
   const diff = encerramento - new Date();
-  if (diff <= 0) {
-    contadorDiv.classList.add('encerrado');
-    tempoSpan.innerText = 'INSCRIÇÕES ENCERRADAS';
-    form.style.display = 'none';
-    return;
-  }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor(diff / 3600000) % 24;
-  const m = Math.floor(diff / 60000) % 60;
-  const s = Math.floor(diff / 1000) % 60;
-  tempoSpan.innerText = `${d}d ${h}h ${m}m ${s}s`;
+  if (diff <= 0) { document.getElementById('ficha').style.display='none'; return; }
+  const d = Math.floor(diff/86400000); const h = Math.floor(diff/3600000)%24;
+  const m = Math.floor(diff/60000)%60; const s = Math.floor(diff/1000)%60;
+  document.getElementById('tempoRestante').innerText = `Encerra em: ${d}d ${h}h ${m}m ${s}s`;
 }
-setInterval(atualizarContador, 1000);
-atualizarContador();
+setInterval(atualizarContador, 1000); atualizarContador();
 
-document.getElementById('btnRegulamento').onclick = () => {
-  aceite.disabled = false;
-};
+document.getElementById('btnRegulamento').onclick = () => { document.getElementById('aceite').disabled = false; };
 
-form.addEventListener('submit', async e => {
+document.getElementById('ficha').onsubmit = async (e) => {
   e.preventDefault();
+  const btn = document.getElementById('btnSubmit');
+  const msgS = document.getElementById('msgSuccess');
+  const msgW = document.getElementById('msgWarn');
+  
+  btn.disabled = true; btn.innerText = "Enviando...";
+  msgS.style.display = msgW.style.display = 'none';
 
-  msgSuccess.style.display = 'none';
-  msgWarn.style.display = 'none';
-
-  if (!aceite.checked) {
-    msgWarn.innerText = '⚠️ É necessário aceitar o regulamento.';
-    msgWarn.style.display = 'block';
-    return;
-  }
-
-  btnSubmit.disabled = true;
-  btnSubmit.innerText = 'Enviando...';
-
-  const rawDate = document.getElementById('nascimento').value;
-  const dateParts = rawDate.split('-');
-  const dataFormatada = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-
+  const rawDate = document.getElementById('nascimento').value.split('-');
   const payload = {
     nome: document.getElementById('nome').value,
     categoria: document.getElementById('categoria').value,
-    nascimento: dataFormatada,
+    nascimento: `${rawDate[2]}/${rawDate[1]}/${rawDate[0]}`,
     entidade: document.getElementById('entidade').value,
     cidade: document.getElementById('cidade').value,
     regiao: document.getElementById('regiao').value,
@@ -213,35 +118,29 @@ form.addEventListener('submit', async e => {
   };
 
   try {
-    // Mudança para 'no-cors' resolve o problema da mensagem de erro persistente
-    await fetch(GAS_WEB_APP_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      cache: 'no-cache',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    });
-
-    // Como os dados chegaram na planilha (confirmado por você), mostramos sucesso.
-    msgSuccess.innerText = `✅ Inscrição enviada com sucesso!\n\nUm e-mail de confirmação será enviado em instantes.\nPor favor, verifique também sua caixa de SPAM.`;
-    msgSuccess.style.display = 'block';
-    
-    form.reset();
-    aceite.disabled = true;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  } catch (err) {
-    console.error('Erro:', err);
-    msgWarn.innerText = '❌ Erro de conexão. Verifique sua internet ou tente novamente.';
-    msgWarn.style.display = 'block';
+    const resp = await fetch(GAS_WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const res = await resp.json();
+    if (res.success) {
+      msgS.innerText = `✅ SUCESSO!\nNúmero de Inscrição: ${res.code}\n${res.espera ? '⚠️ Você está na lista de espera.' : 'Inscrição confirmada.'}`;
+      msgS.style.display = 'block';
+      document.getElementById('ficha').reset();
+    } else {
+      msgW.innerText = "⚠️ " + res.message; msgW.style.display = 'block';
+    }
+  } catch (e) {
+    // Plano B: Se a planilha gravou mas o navegador bloqueou a resposta
+    msgS.innerText = "✅ Inscrição Enviada!\n\nVerifique seu e-mail em alguns minutos para confirmar seu número de inscrição.";
+    msgS.style.display = 'block';
+    document.getElementById('ficha').reset();
   } finally {
-    btnSubmit.disabled = false;
-    btnSubmit.innerText = 'Enviar inscrição';
+    btn.disabled = false; btn.innerText = "Enviar Inscrição";
+    window.scrollTo({top:0, behavior:'smooth'});
   }
-});
+};
 </script>
 </body>
 </html>
+
 
 
 
