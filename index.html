@@ -238,7 +238,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyhFacJMouY4d8C-aYwDV7T-8gc1QWTSNsktNtJPbGqiz7aONWD806S1dO9VzBIXUM41g/exec";
+"https://script.google.com/macros/s/AKfycby4GF7i6sgN265FMH5t0nnW8sVTKYm4TuuuHm1WhX-7N8xC1VJY9tJP0f21FD3CYRcWQg/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -303,10 +303,13 @@ form.addEventListener('submit', async e => {
 
 
   try {
-    const r = await fetch(GAS_WEB_APP_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
+ const r = await fetch(GAS_WEB_APP_URL, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(payload)
+});
 
     const json = await r.json();
 
@@ -336,6 +339,7 @@ form.addEventListener('submit', async e => {
 
 </body>
 </html>
+
 
 
 
