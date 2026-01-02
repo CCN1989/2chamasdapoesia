@@ -143,8 +143,8 @@ footer {
 </div>
 
 <div class="full">
-<label>Modalidade</label>
-<select id="modalidade" required>
+<label>Categoria</label>
+<select id="categoria" required>
 <option value="">— selecione —</option>
 <option>Prenda Pré-Mirim</option>
 <option>Peão Pré-Mirim</option>
@@ -237,7 +237,7 @@ CTG Chama Nativa • Sistema de Inscrições • Concurso Declamação
 
 <script>
 const GAS_WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzlRCwX8ULSgMOXcB6zuZ1NGCz5moAAM8h4UxYJNN-UK5qXu1a_PcbAWJEwf8pv5kWycg/exec";
+"https://script.google.com/macros/s/AKfycbzslGt1KjIYu8UVcyGMWmhinL6SbcVoNTkWk_opWsXc8BREHWklblvtK6Tsms0Y_y0pGg/exec";
 
 const encerramento = new Date('2026-02-10T23:59:59-03:00');
 const tempoSpan = document.getElementById('tempoRestante');
@@ -289,7 +289,7 @@ form.addEventListener('submit', async e => {
 
   const payload = {
     nome: nome.value,
-    modalidade: modalidade.value,
+    categoria: categoria.value,
     entidade: entidade.value,
     cidade: cidade.value,
     regiao: regiao.value,
@@ -337,6 +337,7 @@ form.addEventListener('submit', async e => {
 
 </body>
 </html>
+
 
 
 
